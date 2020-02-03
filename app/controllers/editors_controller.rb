@@ -1,6 +1,7 @@
 class EditorsController < ApplicationController
   # GET /editors
   def index
+    render json: Editors.all
   end
   
   # GET /editors/<email>
