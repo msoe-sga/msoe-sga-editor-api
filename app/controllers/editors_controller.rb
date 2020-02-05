@@ -1,7 +1,8 @@
 class EditorsController < ApplicationController
   # GET /editors
   def index
-    render json: Editors.all
+    # TODO: Add a page size based on what the GUI looks like
+    render json: Editors.all(sort: { 'Name': 'asc'})
   end
   
   # GET /editors/<email>
