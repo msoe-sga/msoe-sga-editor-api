@@ -1,24 +1,36 @@
 class EditorsController < ApplicationController
   # GET /editors
   def index
-    # TODO: Add a page size based on what the GUI looks like
-    render json: Editors.all(sort: { 'Name': 'asc'})
+    begin
+      # TODO: Add a page size based on what the GUI looks like
+      render json: Editors.all(sort: { 'Name': 'asc'})
+    rescue Airrecord::Error => e
+      render json: { 'error': e.message }, status: 500
+    end
   end
   
   # GET /editors/email
   def get_by_email
-    render json: Editors.find_by_email(params[:email])
+    begin
+      render json: Editors.find_by_email(params[:email])
+    rescue Airrecord::Error => e
+      render json: { 'error': e.message }, status: 500
+    end
   end
 
   # POST /editors
   def create
     if params[:name] && params[:email]
-      new_editor = Editors.create('Name': params[:name], 'Email': params[:email])
-      render json: new_editor 
+      begin
+        new_editor = Editors.create('Name': params[:name], 'Email': params[:email])
+        render json: new_editor 
+      rescue Airrecord::Error => e
+        render json: { 'error': e.message }, status: 500
+      end
     elsif !params[:name]
-      render json: { 'error': 'A name is required to create an editor.' }
+      render json: { 'error': 'A name is required to create an editor.' }, status: 400
     else
-      render json: { 'error': 'A email is required to create an editor.'}
+      render json: { 'error': 'A email is required to create an editor.'}, status: 400
     end
   end
 
