@@ -36,3 +36,6 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'airrecord'
+
+gem 'rubocop', '~> 0.71'
+gem 'rubocop-rails_config'
