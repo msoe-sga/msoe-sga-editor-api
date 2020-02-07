@@ -37,5 +37,7 @@ class EditorsController < ApplicationController
     editor['Email'] = params[:email] if params[:email]
     editor.save
     render json: editor
+    rescue Airrecord::Error => e 
+      render json: { 'error': e.message }, status: 500
   end
 end
