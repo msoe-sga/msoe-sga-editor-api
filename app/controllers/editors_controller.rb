@@ -9,7 +9,12 @@ class EditorsController < ApplicationController
   
   # GET /editors/email
   def get_by_email
-    render json: Editors.find_by_email(params[:email])
+    find_by_email_result = Editors.find_by_email(params[:email])
+    if find_by_email_result.length == 0
+      render json: { 'error': "No editor exists with the email #{params[:email]}" }, status: 400
+    else
+      render json: find_by_email_result.first
+    end
     rescue Airrecord::Error => e
       render json: { 'error': e.message }, status: 500
   end
@@ -23,21 +28,40 @@ class EditorsController < ApplicationController
       rescue Airrecord::Error => e
         render json: { 'error': e.message }, status: 500
       end
-    elsif !params[:name]
+    elsif !params[:name] && params[:email]
       render json: { 'error': 'A name is required to create an editor.' }, status: 400
-    else
+    elsif !params[:email] && params[:name]
       render json: { 'error': 'A email is required to create an editor.' }, status: 400
+    else
+      render json: { 'error': 'A name and an email is required to create an editor.' }, status: 400
     end
   end
 
   # PUT /editors
   def edit 
     editor = Editors.find(params[:id])
-    editor['Name'] = params[:name] if params[:name]
-    editor['Email'] = params[:email] if params[:email]
-    editor.save
-    render json: editor
+    if editor
+      editor['Name'] = params[:name] if params[:name]
+      editor['Email'] = params[:email] if params[:email]
+      editor.save
+      render json: editor
+    else
+      render json: { 'error': "No editor exists with the id #{params[:id]}" }
+    end
     rescue Airrecord::Error => e 
+      render json: { 'error': e.message }, status: 500
+  end
+
+  # DELETE /editors
+  def delete
+    editor = Editors.find(params[:id])
+    if editor
+      editor.destory
+      render json: { 'success': true }
+    else
+      render json: { 'success': false }
+    end
+    rescue Airrecord::Error => e
       render json: { 'error': e.message }, status: 500
   end
 end

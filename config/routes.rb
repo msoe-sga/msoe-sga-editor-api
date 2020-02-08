@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   get '/editors/email', to: 'editors#get_by_email'
   post '/editors', to: 'editors#create'
   put '/editors', to: 'editors#edit'
+  delete '/editors', to: 'editors#delete'
 end
