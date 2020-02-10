@@ -51,7 +51,7 @@ class EditorsController < ApplicationController
       editor.save
       render json: editor
     else
-      render json: { 'error': "No editor exists with the id #{params[:id]}" }
+      render json: { 'error': "No editor exists with the id #{params[:id]}" }, status: 400
     end
     rescue Airrecord::Error => e 
       render json: { 'error': e.message }, status: 500

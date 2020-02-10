@@ -103,6 +103,7 @@ class EditorsControllerTest < ActionDispatch::IntegrationTest
 
     # Act
     post '/editors', params { name: 'test', email: 'test@gmail.com' }
+    json = JSON.parse(response.body)
 
     # Assert
     assert_response :internal_server_error
@@ -113,9 +114,33 @@ class EditorsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'create should return an error message with a 400 status code when not given a name' do 
+    # Act
+    post '/editors', params { email: 'test@gmail.com' }
+    json = JSON.parse(response.body)
+
+    # Assert
+    assert_response :bad_request
+    assert_equal 'A name is required to create an editor.', json['error']
   end
 
   test 'create should return an error message with a 400 status code when not given an email' do 
+    # Act
+    post '/editors', params { name: 'test' }
+    json = JSON.parse(response.body)
+
+    # Assert
+    assert_response :bad_request
+    assert_equal 'A email is required to create an editor.', json['error']
+  end
+
+  test 'create should return an error message with a 400 status code when not given a name or an email' do 
+    # Act
+    post '/editors'
+    json = JSON.parse(response.body)
+
+    # Assert
+    assert_response :bad_request
+    assert_equal 'A name and an email is required to create an editor.', json['error']
   end
 
   test 'edit should return the updated editor with a 200 status code when provided a new name and email' do 
@@ -127,19 +152,32 @@ class EditorsControllerTest < ActionDispatch::IntegrationTest
   test 'edit should return the updated editor with a 200 status code when provided a new email and not a name' do 
   end
 
+  test 'edit should return an error message with a 400 status code when provided an id of a nonexistant editor' do 
+  end
+
   test 'edit should return a 500 status code when an Airrecord::Error is raised' do 
     # Arrange
     Editors.expects(:find).raises(Airrecord::Error, 'My Error Message')
 
     # Act
     put '/editors'
+    json = JSON.parse(response.body)
 
     # Assert
     assert_response :internal_server_error
     assert_equal 'My Error Message', json['error']
   end
 
-  test 'delete should return a 200 ok response when provided valid parameters' do 
+  test 'delete should return a 200 ok response with a successful delete indication when provided valid parameters' do 
+  end
+
+  test 'delete should return a 200 ok response with a false delete indication when provided an id of a nonexistant editor' do 
+    # Act
+    delete '/editors?id=nonexistantid'
+
+    # Assert
+    assert_response :success
+    assert_not json['success']
   end
 
   test 'delete should return a 500 status code when an Airrecord::Error is raised' do 
@@ -148,6 +186,7 @@ class EditorsControllerTest < ActionDispatch::IntegrationTest
 
     # Act
     delete '/editors', params: { id: 'myid' }
+    json = JSON.parse(response.body)
 
     # Assert
     assert_response :internal_server_error
