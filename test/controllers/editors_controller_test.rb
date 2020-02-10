@@ -109,6 +109,9 @@ class EditorsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 'My Error Message', json['error']
   end
 
+  test 'create should return an error message with a 400 status code when given an email of an existing edtior' do 
+  end
+
   test 'create should return an error message with a 400 status code when not given a name' do 
   end
 

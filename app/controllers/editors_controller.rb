@@ -22,11 +22,16 @@ class EditorsController < ApplicationController
   # POST /editors
   def create
     if params[:name] && params[:email]
-      begin
-        new_editor = Editors.create('Name': params[:name], 'Email': params[:email])
-        render json: new_editor 
-      rescue Airrecord::Error => e
-        render json: { 'error': e.message }, status: 500
+      find_by_email_result = Editors.find_by_email(params[:email])
+      if find_by_email_result.length > 0
+        render json: { 'error': "An editor already exists with the email #{params[:email]}" }, status: 400
+      else
+        begin
+          new_editor = Editors.create('Name': params[:name], 'Email': params[:email])
+          render json: new_editor 
+        rescue Airrecord::Error => e
+          render json: { 'error': e.message }, status: 500
+        end
       end
     elsif !params[:name] && params[:email]
       render json: { 'error': 'A name is required to create an editor.' }, status: 400
