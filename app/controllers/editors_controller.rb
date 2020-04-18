@@ -58,7 +58,7 @@ class EditorsController < ApplicationController
   def delete
     editor = Editors.find(params[:id])
     if editor
-      editor.destory
+      editor.destroy
       render json: { 'success': true }
     else
       render json: { 'success': false }
