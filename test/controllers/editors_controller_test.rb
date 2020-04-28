@@ -102,7 +102,7 @@ class EditorsControllerTest < ActionDispatch::IntegrationTest
     Editors.expects(:create).raises(Airrecord::Error, 'My Error Message')
 
     # Act
-    post '/editors', params { name: 'test', email: 'test@gmail.com' }
+    post '/editors', params: { name: 'test', email: 'test@gmail.com' }
     json = JSON.parse(response.body)
 
     # Assert
@@ -115,7 +115,7 @@ class EditorsControllerTest < ActionDispatch::IntegrationTest
 
   test 'create should return an error message with a 400 status code when not given a name' do 
     # Act
-    post '/editors', params { email: 'test@gmail.com' }
+    post '/editors', params: { email: 'test@gmail.com' }
     json = JSON.parse(response.body)
 
     # Assert
@@ -125,7 +125,7 @@ class EditorsControllerTest < ActionDispatch::IntegrationTest
 
   test 'create should return an error message with a 400 status code when not given an email' do 
     # Act
-    post '/editors', params { name: 'test' }
+    post '/editors', params: { name: 'test' }
     json = JSON.parse(response.body)
 
     # Assert
