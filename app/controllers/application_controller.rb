@@ -4,16 +4,18 @@ class ApplicationController < ActionController::API
 
   private
     def authenticate_token
-      validator = GoogleIDToken::Validator.new
+      validator = GoogleTokenValidator.new
       payload = validator.check(parse_bearer_token, ENV['GOOGLE_CLIENT_ID'])
-      email = payload['email']
-      rescue GoogleIDToken::ValidationError => e
-        render json: { 'error': 'Invalid Google oauth token' }, status: 401
+      @email = payload['email']
+      render json: { 'error': 'The associated Google Account does not have access to the editor', 'isAuthorized': false },
+        status: 401 if Editors.find_by_email(@email).length == 0
+      rescue GoogleIDToken::ValidationError
+        render json: { 'error': 'Invalid Google oauth token', 'isAuthorized': false }, status: 401
     end
 
     def parse_bearer_token
       pattern = /^Bearer /
       header  = request.env['Authorization'] 
-      header.gsub(pattern, '') if header && header.match(pattern)
+      return header.gsub(pattern, '') if header && header.match(pattern)
     end
 end
