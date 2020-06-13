@@ -4,7 +4,7 @@ class ApplicationController < ActionController::API
 
   private
     def authenticate_token
-      validator = GoogleTokenValidator.new
+      validator = GoogleIDToken::Validator.new
       payload = validator.check(parse_bearer_token, ENV['GOOGLE_CLIENT_ID'])
       @email = payload['email']
       render json: { 'error': 'The associated Google Account does not have access to the editor', 'isAuthorized': false },
