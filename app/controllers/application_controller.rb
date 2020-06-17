@@ -15,7 +15,7 @@ class ApplicationController < ActionController::API
 
     def parse_bearer_token
       pattern = /^Bearer /
-      header  = request.env['Authorization'] 
+      header  = request.headers['Authorization'] 
       return header.gsub(pattern, '') if header && header.match(pattern)
     end
 end
