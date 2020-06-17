@@ -44,56 +44,6 @@ class EditorsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 'My Error Message', json['error']
   end
 
-  test 'get_by_email should return the editor with a 200 status code when an editor 
-        with the email exists in the Airtable database' do 
-    editor1 = nil
-    editor2 = nil
-    editor3 = nil
-
-    begin
-      # Arrange
-      editor1 = Editors.create('Name': 'test2', 'Email': 'test2@gmail.com')
-      editor2 = Editors.create('Name': 'test1', 'Email': 'test1@gmail.com')
-      editor3 = Editors.create('Name': 'test3', 'Email': 'test3@gmail.com')
-
-      # Act
-      get '/editors?email=test3@gmail.com'
-      json = JSON.parse(response.body)
-
-      # Assert
-      assert_response :success
-      assert_editor('test3', 'test3@gmail.com', json)
-    ensure
-      editor1.destroy if editor1
-      editor2.destroy if editor2
-      editor3.destroy if editor3
-    end
-  end
-
-  test 'index should return an error message with a 400 status code when an editor with the email 
-        does not exist in the Airtable database' do 
-    # Act
-    get '/editors?email=test3@gmail.com'
-    json = JSON.parse(response.body)
-
-    # Assert
-    assert_response :bad_request
-    assert_equal 'No editor exists with the email test3@gmail.com', json['error']
-  end
-
-  test 'index should return an error message with a 500 status code when an Airrecord::Error is raised when fetching by email' do 
-    # Arrange
-    Editors.expects(:find_by_email).raises(Airrecord::Error, 'My Error Message')
-
-    # Act
-    get '/editors?email=test3@gmail.com'
-    json = JSON.parse(response.body)
-
-    # Assert
-    assert_response :internal_server_error
-    assert_equal 'My Error Message', json['error']
-  end
-
   test 'create should return the new editor with a 200 status code when given valid parameters' do 
     # Act
     new_editor_id = nil

@@ -1,16 +1,7 @@
 class EditorsController < ApplicationController
   # GET /editors
   def index
-    if params[:email]
-      find_by_email_result = Editors.find_by_email(params[:email])
-      if find_by_email_result.length == 0
-        render json: { 'error': "No editor exists with the email #{params[:email]}" }, status: 400
-      else
-        render json: find_by_email_result.first
-      end
-    else
-      render json: Editors.all(sort: { 'Name': 'asc' })
-    end
+    render json: Editors.all(sort: { 'Name': 'asc' })
     rescue Airrecord::Error => e
       render json: { 'error': e.message }, status: 500
   end
