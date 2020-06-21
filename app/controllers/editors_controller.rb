@@ -1,17 +1,7 @@
 class EditorsController < ApplicationController
   # GET /editors
   def index
-    if params[:email]
-      find_by_email_result = Editors.find_by_email(params[:email])
-      if find_by_email_result.length == 0
-        render json: { 'error': "No editor exists with the email #{params[:email]}" }, status: 400
-      else
-        render json: find_by_email_result.first
-      end
-    else
-      # TODO: Add a page size based on what the GUI looks like
-      render json: Editors.all(sort: { 'Name': 'asc' })
-    end
+    render json: Editors.all(sort: { 'Name': 'asc' })
     rescue Airrecord::Error => e
       render json: { 'error': e.message }, status: 500
   end
@@ -42,28 +32,28 @@ class EditorsController < ApplicationController
   # PUT /editors
   def edit 
     editor = Editors.find(params[:id])
-    if editor
-      editor['Name'] = params[:name] if params[:name]
-      editor['Email'] = params[:email] if params[:email]
-      editor.save
-      render json: editor
-    else
-      render json: { 'error': "No editor exists with the id #{params[:id]}" }, status: 400
-    end
+    editor['Name'] = params[:name] if params[:name]
+    editor['Email'] = params[:email] if params[:email]
+    editor.save
+    render json: editor
     rescue Airrecord::Error => e 
-      render json: { 'error': e.message }, status: 500
+      if e.message.include? '404'
+        render json: { 'error': "No editor exists with the id #{params[:id]}" }, status: 404
+      else
+        render json: { 'error': e.message }, status: 500
+      end
   end
 
   # DELETE /editors
   def delete
     editor = Editors.find(params[:id])
-    if editor
-      editor.destroy
-      render json: { 'success': true }
-    else
-      render json: { 'success': false }
-    end
+    editor.destroy
+    render json: { 'success': true }
     rescue Airrecord::Error => e
-      render json: { 'error': e.message }, status: 500
+      if e.message.include? '404'
+        render json: { 'success': false }, status: 404
+      else
+        render json: { 'error': e.message }, status: 500
+      end
   end
 end
