@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative'./base_controller_test'
 
 class ApplicationControllerTest < BaseControllerTest
   test 'an endpoint should raise a 401 error when a user does not have access to the editor' do 
