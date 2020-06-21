@@ -44,3 +44,5 @@ gem 'airrecord'
 
 gem 'rubocop', '~> 0.71'
 gem 'rubocop-rails_config'
+
+gem 'google-id-token'
