@@ -1,3 +1,5 @@
+require 'jekyll_github_pages'
+
 class AboutController < ApplicationController
   def initialize
     @page_service = Services::PageService.new(Rails.configuration.repo_name, ENV['GITHUB_ACCESS_TOKEN'])
