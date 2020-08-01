@@ -46,4 +46,4 @@ gem 'rubocop', '~> 0.71'
 gem 'rubocop-rails_config'
 
 gem 'google-id-token'
-gem 'jekyll_github_pages', path: 'C:\git\jekyll-github-pages-gem\jekyll-github-pages-gem-1.1.0.gem'
+gem 'jekyll-github-pages-gem', github: 'msoe-sg/jekyll-github-pages-gem', branch: 'feature/addPageSupport'
