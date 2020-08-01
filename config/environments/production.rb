@@ -97,4 +97,5 @@ Rails.application.configure do
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
   config.airtable_editors_table_name = 'EditorsProduction'
+  config.repo_name = 'msoe-sg/msoe-sg-website'
 end
