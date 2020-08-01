@@ -9,4 +9,11 @@ class AboutController < ApplicationController
   def index
     render json: @page_service.get_markdown_page(Rails.configuration.about_page_file_path, Rails.configuration.about_page_pr_body)
   end
+
+  # PUT /about
+  def edit
+    @page_service.save_page_update(Rails.configuration.about_page_file_path, Rails.configuration.about_page_title, 
+                                   params[:ref], Rails.configuration.about_page_pr_body)
+    render json: { 'success': true }
+  end
 end
