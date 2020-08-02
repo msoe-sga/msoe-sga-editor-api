@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/msoe-sg/jekyll-github-pages-gem.git
-  revision: e7d3d6f8e0ab9073c5cc56b75200281bf8df673a
+  revision: 9eeed0aa04c45cf8b71fc4d1da35616ea59a5f55
   branch: feature/addPageSupport
   specs:
     jekyll-github-pages-gem (1.1.0)
@@ -184,8 +184,8 @@ GEM
       rubocop-ast (>= 0.1.0, < 1.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 2.0)
-    rubocop-ast (0.2.0)
-      parser (>= 2.7.0.1)
+    rubocop-ast (0.3.0)
+      parser (>= 2.7.1.4)
     rubocop-performance (1.7.1)
       rubocop (>= 0.82.0)
     rubocop-rails (2.7.1)
