@@ -5,10 +5,10 @@ Rails.application.routes.draw do
   put '/editors', to: 'editors#edit'
   delete '/editors', to: 'editors#delete'
   get '/about', to: 'about#index'
-  get '/about/preview', to: 'about#preview'
+  post '/about/preview', to: 'about#preview'
   put '/about', to: 'about#edit'
   get '/posts', to: 'posts#index'
-  get '/posts/preview', to: 'posts#preview'
+  post '/posts/preview', to: 'posts#preview'
   post '/posts', to: 'posts#create'
   put '/posts', to: 'posts#create'
 end

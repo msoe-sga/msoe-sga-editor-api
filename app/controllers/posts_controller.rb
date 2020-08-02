@@ -15,7 +15,7 @@ class PostsController < ApplicationController
     }
   end
   
-  # GET /posts/preview
+  # POST /posts/preview
   def preview
     render json: {
         'result': @kramdown_service.get_preview(params[:text])

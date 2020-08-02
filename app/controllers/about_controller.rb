@@ -12,7 +12,7 @@ class AboutController < ApplicationController
     render json: @page_service.get_markdown_page(Rails.configuration.about_page_file_path, Rails.configuration.about_page_pr_body)
   end
   
-  # GET /about/preview
+  # POST /about/preview
   def preview
     render json: {
         'result': @kramdown_service.get_preview(params[:text])
