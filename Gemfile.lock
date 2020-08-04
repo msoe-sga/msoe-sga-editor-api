@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/msoe-sg/jekyll-github-pages-gem.git
-  revision: 9eeed0aa04c45cf8b71fc4d1da35616ea59a5f55
+  revision: 05482108b044f83687a9b7462c3941659376f54e
   branch: feature/addPageSupport
   specs:
     jekyll-github-pages-gem (1.1.0)
