@@ -1,6 +1,14 @@
 require 'test_helper'
 
 class BaseControllerTest < ActionDispatch::IntegrationTest
+  setup do 
+    setup_google_auth_mocks
+  end
+
+  teardown do 
+    delete_auth_editor
+  end
+  
   protected
     AUTH_TOKEN = 'token'
 

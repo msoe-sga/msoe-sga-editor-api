@@ -1,14 +1,6 @@
-require 'test_helper'
+require_relative './base_controller_test'
 
 class EditorsControllerTest < BaseControllerTest
-  setup do 
-    setup_google_auth_mocks
-  end
-
-  teardown do 
-    delete_auth_editor
-  end
-  
   test 'index should return all editors with a 200 status code from the Airtable database 
         sorted by name when the request is valid' do 
     editor1 = nil
@@ -45,7 +37,7 @@ class EditorsControllerTest < BaseControllerTest
     new_editor_id = nil
 
     begin
-      post '/editors', params: { name: 'test', email: 'test@gmail.com' }, headers: { 'Authorization': "Bearer #{AUTH_TOKEN}" }
+      post '/editors', params: { name: 'test', email: 'test@gmail.com' }, 
       json = JSON.parse(response.body)
       new_editor_id = json['id']
 
