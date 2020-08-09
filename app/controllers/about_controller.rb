@@ -3,20 +3,12 @@ require 'jekyll_github_pages'
 class AboutController < ApplicationController
   def initialize
     @page_service = Services::PageService.new(Rails.configuration.repo_name, ENV['GITHUB_ACCESS_TOKEN'])
-    @kramdown_service = Services::KramdownService.new
     @page_factory = Factories::PageFactory.new
   end
 
   # GET /about
   def index
     render json: @page_service.get_markdown_page(Rails.configuration.about_page_file_path, Rails.configuration.about_page_pr_body)
-  end
-  
-  # POST /about/preview
-  def preview
-    render json: {
-        'result': @kramdown_service.get_preview(params[:text])
-    }
   end
 
   # PUT /about

@@ -3,7 +3,6 @@ require 'jekyll_github_pages'
 class PostsController < ApplicationController
   def initialize
     @post_service = Services::PostService.new(Rails.configuration.repo_name, ENV['GITHUB_ACCESS_TOKEN']))
-    @kramdown_service = Services::KramdownService.new
     @post_factory = Factories::PostFactory.new
   end
 
@@ -12,13 +11,6 @@ class PostsController < ApplicationController
     render json: {
         'existingPosts': @post_service.get_all_posts,
         'prPosts': @post_service.get_all_posts_in_pr(Rails.configuration.post_pr_body)
-    }
-  end
-  
-  # POST /posts/preview
-  def preview
-    render json: {
-        'result': @kramdown_service.get_preview(params[:text])
     }
   end
 
