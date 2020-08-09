@@ -23,8 +23,8 @@ class AboutController < ApplicationController
   def edit
     formatted_page_contents = @page_factory.create_jekyll_page_text(params[:text], Rails.configuration.about_page_title, 
                                                                     Rails.configuration.about_permalink)
-    @page_service.save_page_update(Rails.configuration.about_page_file_path, Rails.configuration.about_page_title, 
-                                   formatted_page_contents, params[:ref], Rails.configuration.about_page_pr_body)
-    render json: { 'success': true }
+    result = @page_service.save_page_update(Rails.configuration.about_page_file_path, Rails.configuration.about_page_title, 
+                                            formatted_page_contents, params[:ref], Rails.configuration.about_page_pr_body)
+    render json: result
   end
 end
