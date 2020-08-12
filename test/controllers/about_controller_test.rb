@@ -27,6 +27,26 @@ class AboutControllerTest < BaseControllerTest
     assert_equal 'My Ref', json['github_ref']
     assert_equal 'http://example.com/pulls/1', json['pull_request_url']
   end
+  
+  test 'edit should return an error if the request does not contain a text parameter' do 
+    # Act
+    put '/about', headers: { 'Authorization': "Bearer #{AUTH_TOKEN}" }
+    json = JSON.parse(response.body)
+
+    # Assert
+    assert_response :bad_request
+    assert_equal 'The about page cannot be edited to have no text.', json['error']
+  end
+
+  test 'edit should return an error if the request contains an empty text parameter' do 
+    # Act
+    put '/about', params: { text: '' }, headers: { 'Authorization': "Bearer #{AUTH_TOKEN}" }
+    json = JSON.parse(response.body)
+
+    # Assert
+    assert_response :bad_request
+    assert_equal 'The about page cannot be edited to have no text.', json['error']
+  end
 
   test 'edit should save the updated about page and return the result of the updated about page' do
     # Arrange
