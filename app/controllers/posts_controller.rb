@@ -16,7 +16,7 @@ class PostsController < ApplicationController
 
   # POST /posts
   def create
-    if !params[:text]
+    if !params[:text] || params[:text].empty?
       render json: { 'error': 'Cannot create a post that is empty.' }, status: 400
     elsif !params[:author]
       render json: { 'error': 'A author is required to create a post.' }, status: 400
@@ -31,7 +31,7 @@ class PostsController < ApplicationController
 
   # PUT /posts
   def edit
-    if !params[:text]
+    if !params[:text] || params[:text].empty?
       render json: { 'error': 'Cannot edit a post to be empty.' }, status: 400
     elsif !params[:author]
       render json: { 'error': 'A author is required to edit a post.' }, status: 400

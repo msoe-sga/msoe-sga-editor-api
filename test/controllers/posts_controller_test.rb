@@ -52,6 +52,16 @@ class PostsControllerTest < BaseControllerTest
     assert_response :bad_request
     assert_equal 'A title is required to create a post.', json['error']
   end
+  
+  test 'create should return an error when the text provided for the post is empty' do 
+    # Act
+    post '/posts', params: { text: '', author: 'Author', title: 'Title' }, headers: { 'Authorization': "Bearer #{AUTH_TOKEN}" }
+    json = JSON.parse(response.body)
+
+    # Assert
+    assert_response :bad_request
+    assert_equal 'Cannot create a post that is empty.', json['error']
+  end
 
   test 'create should successfully create a post when given valid parameters for a post' do 
     # Arrange
@@ -105,6 +115,17 @@ class PostsControllerTest < BaseControllerTest
     # Assert
     assert_response :bad_request
     assert_equal 'The post path is required to edit a post.', json['error']
+  end
+  
+  test 'edit should return an error when the text provided is empty' do 
+    # Act
+    put '/posts', params: { text: '', author: 'Author', title: 'Title', path: '_posts/post.md' }, 
+                  headers: { 'Authorization': "Bearer #{AUTH_TOKEN}" }
+    json = JSON.parse(response.body)
+
+    # Assert
+    assert_response :bad_request
+    assert_equal 'Cannot edit a post to be empty.', json['error']
   end
 
   test 'edit should successfully edit a post when not given a ref' do 
