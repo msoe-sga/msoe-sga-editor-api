@@ -37,7 +37,7 @@ class EditorsControllerTest < BaseControllerTest
     new_editor_id = nil
 
     begin
-      post '/editors', params: { name: 'test', email: 'test@gmail.com' }, 
+      post '/editors', params: { name: 'test', email: 'test@gmail.com' }, headers: { 'Authorization': "Bearer #{AUTH_TOKEN}" }
       json = JSON.parse(response.body)
       new_editor_id = json['id']
 

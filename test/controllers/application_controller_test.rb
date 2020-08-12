@@ -1,6 +1,4 @@
-require_relative './base_controller_test'
-
-class ApplicationControllerTest < BaseControllerTest
+class ApplicationControllerTest < ActionDispatch::IntegrationTest
   test 'an endpoint should raise a 401 error when a user does not have access to the editor' do 
     # Arrange
     ENV['GOOGLE_CLIENT_ID'] = 'client-id'
