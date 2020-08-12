@@ -8,6 +8,6 @@ Rails.application.routes.draw do
   put '/about', to: 'about#edit'
   get '/posts', to: 'posts#index'
   post '/posts', to: 'posts#create'
-  put '/posts', to: 'posts#create'
+  put '/posts', to: 'posts#edit'
   post '/preview', to: 'preview#preview'
 end
