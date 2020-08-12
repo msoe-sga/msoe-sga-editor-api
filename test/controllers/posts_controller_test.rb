@@ -159,10 +159,9 @@ class PostsControllerTest < BaseControllerTest
   end
 
   private
-
-  def create_post_for_test(title)
-    result = Post.new
-    result.title = title
-    result
-  end
+    def create_post_for_test(title)
+      result = Post.new
+      result.title = title
+      result
+    end
 end

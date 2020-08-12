@@ -43,7 +43,7 @@ class PostsController < ApplicationController
       formatted_post_text = @post_factory.create_jekyll_post_text(params[:text], params[:author], params[:title])
       @post_service.edit_post(formatted_post_text, params[:title], params[:path], Rails.configuration.post_pr_body) if !params[:ref]
       @post_service.edit_post_in_pr(formatted_post_text, params[:title], params[:path], params[:ref]) if params[:ref]
-      render json: { 'success': true}
+      render json: { 'success': true }
     end
   end
 end
