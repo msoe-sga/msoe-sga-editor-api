@@ -1,13 +1,3 @@
-GIT
-  remote: https://github.com/msoe-sg/jekyll-github-pages-gem.git
-  revision: f27a53a471e5e78e0862b757ede030150fdf27b0
-  branch: feature/addPageSupport
-  specs:
-    jekyll-github-pages-gem (1.1.0)
-      carrierwave (>= 2.0.0.rc, < 3.0)
-      kramdown (~> 2.3.0)
-      octokit (~> 4.18)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -100,7 +90,11 @@ GEM
     image_processing (1.11.0)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
-    jwt (2.2.1)
+    jekyll-github-pages-gem (1.1.0)
+      carrierwave (>= 2.0.0.rc, < 3.0)
+      kramdown (~> 2.3.0)
+      octokit (~> 4.18)
+    jwt (2.2.2)
     kramdown (2.3.0)
       rexml
     listen (3.1.5)
@@ -204,7 +198,7 @@ GEM
     sawyer (0.8.2)
       addressable (>= 2.3.5)
       faraday (> 0.8, < 2.0)
-    simplecov (0.18.5)
+    simplecov (0.19.0)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
     simplecov-html (0.12.2)
@@ -239,7 +233,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
   google-id-token
-  jekyll-github-pages-gem!
+  jekyll-github-pages-gem
   listen (>= 3.0.5, < 3.2)
   mocha
   puma (~> 4.3)
