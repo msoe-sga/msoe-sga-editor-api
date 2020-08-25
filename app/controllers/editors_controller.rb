@@ -1,7 +1,7 @@
 class EditorsController < ApplicationController
   # GET /editors
   def index
-    render json: Editors.all(sort: { 'Name': 'asc' })
+    render json: Editors.all(sort: { 'Name': 'asc' }).select{ |editor| editor['Email'] != @email }
     rescue Airrecord::Error => e
       render json: { 'error': e.message }, status: 500
   end

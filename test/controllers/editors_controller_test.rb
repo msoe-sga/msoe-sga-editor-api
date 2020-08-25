@@ -20,11 +20,10 @@ class EditorsControllerTest < BaseControllerTest
       # Assert
       assert_response :success
 
-      assert_equal 4, json.length
-      assert_editor('auth', 'auth@gmail.com', json[0])
-      assert_editor('test1', 'test1@gmail.com', json[1])
-      assert_editor('test2', 'test2@gmail.com', json[2])
-      assert_editor('test3', 'test3@gmail.com', json[3])
+      assert_equal 3, json.length
+      assert_editor('test1', 'test1@gmail.com', json[0])
+      assert_editor('test2', 'test2@gmail.com', json[1])
+      assert_editor('test3', 'test3@gmail.com', json[2])
     ensure
       editor1.destroy if editor1
       editor2.destroy if editor2
