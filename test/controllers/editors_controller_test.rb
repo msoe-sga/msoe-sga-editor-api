@@ -1,14 +1,6 @@
-require 'test_helper'
+require_relative './base_controller_test'
 
 class EditorsControllerTest < BaseControllerTest
-  setup do 
-    setup_google_auth_mocks
-  end
-
-  teardown do 
-    delete_auth_editor
-  end
-  
   test 'index should return all editors with a 200 status code from the Airtable database 
         sorted by name when the request is valid' do 
     editor1 = nil

@@ -4,4 +4,10 @@ Rails.application.routes.draw do
   post '/editors', to: 'editors#create'
   put '/editors', to: 'editors#edit'
   delete '/editors', to: 'editors#delete'
+  get '/about', to: 'about#index'
+  put '/about', to: 'about#edit'
+  get '/posts', to: 'posts#index'
+  post '/posts', to: 'posts#create'
+  put '/posts', to: 'posts#edit'
+  post '/preview', to: 'preview#preview'
 end
