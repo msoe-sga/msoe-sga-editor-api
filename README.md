@@ -6,8 +6,9 @@
 4. Next install the dependencies for the site by running the command `bundle install`
 5. Get the Airtable API key from the webmaster and run the command `export AIRTABLE_API_KEY="<Insert Key Here>"`
 6. Get the GitHub API token from the webmaster and run the command `export GITHUB_ACCESS_TOKEN="<Insert Token Here>"`
-7. If the bundle install command succeeds you should be able to run the api locally by running the command `rails server`. This should put forth some output, and you can now make requests to the api on port 3000
-8. Contribute
+7. Get the Google Client Id from the webmaster and run the command `export GOOGLE_CLIENT_ID="<Insert Client Id Here>"`
+8. If the bundle install command succeeds you should be able to run the api locally by running the command `rails server`. This should put forth some output, and you can now make requests to the api on port 3000
+9. Contribute
 Our git flow process is typical--we have a master branch that gets released to the public, a dev branch for merging ongoing development, and feature branches for individual tasks.
 If you have questions on how to contribute, please contact admin@msoe-sse.com or msoe.sg.hosting@gmail.com and we will get back to you at our earliest convenience.
 
