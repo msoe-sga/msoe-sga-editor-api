@@ -41,6 +41,8 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   
+  config.hosts << 'msoe-sg-editor-api-staging.herokuapp.com'
+
   config.airtable_editors_table_name = 'EditorsDevelopment'
   config.repo_name = 'msoe-sg/sg-editor-test-repo'
 end
