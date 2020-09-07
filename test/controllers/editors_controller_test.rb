@@ -1,14 +1,6 @@
-require 'test_helper'
+require_relative './base_controller_test'
 
 class EditorsControllerTest < BaseControllerTest
-  setup do 
-    setup_google_auth_mocks
-  end
-
-  teardown do 
-    delete_auth_editor
-  end
-  
   test 'index should return all editors with a 200 status code from the Airtable database 
         sorted by name when the request is valid' do 
     editor1 = nil
@@ -28,11 +20,10 @@ class EditorsControllerTest < BaseControllerTest
       # Assert
       assert_response :success
 
-      assert_equal 4, json.length
-      assert_editor('auth', 'auth@gmail.com', json[0])
-      assert_editor('test1', 'test1@gmail.com', json[1])
-      assert_editor('test2', 'test2@gmail.com', json[2])
-      assert_editor('test3', 'test3@gmail.com', json[3])
+      assert_equal 3, json.length
+      assert_editor('test1', 'test1@gmail.com', json[0])
+      assert_editor('test2', 'test2@gmail.com', json[1])
+      assert_editor('test3', 'test3@gmail.com', json[2])
     ensure
       editor1.destroy if editor1
       editor2.destroy if editor2

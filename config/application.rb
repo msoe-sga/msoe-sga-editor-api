@@ -40,9 +40,13 @@ module MsoeSgEditorApi
         origins '*'
         resource '*',
                  headers: :any,
-                 expose: %w(access-token expiry token-type uid client),
                  methods: %i(get post options put delete)
       end
     end
+    config.about_page_pr_body = 'About Page Pull Request generated automatically through the MSOE SG Editor'
+    config.about_page_file_path = 'about.md'
+    config.about_page_title = 'About'
+    config.about_permalink = '/about/'
+    config.post_pr_body = 'Post Pull Request generated automatically through the MSOE SG Editor'
   end
 end
