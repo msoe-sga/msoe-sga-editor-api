@@ -52,4 +52,4 @@ gem 'google-id-token'
 # to use the version of the gem from rubygems. Note when you do that you will need to rerun the bundle install command again
 # gem 'jekyll-github-pages-gem', github: 'msoe-sg/jekyll-github-pages-gem', branch: 'feature/addPageSupport'
 
-gem 'jekyll-github-pages-gem', '~> 1.1.2'
+gem 'jekyll-github-pages-gem', '~> 1.1.3'
