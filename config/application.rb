@@ -34,15 +34,6 @@ module MsoeSgEditorApi
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
     config.airtable_editor_base_id = 'appQSnqLbbNRukQJh'
-
-    config.middleware.use Rack::Cors do 
-      allow do
-        origins '*'
-        resource '*',
-                 headers: :any,
-                 methods: %i(get post options put delete)
-      end
-    end
     config.about_page_pr_body = 'About Page Pull Request generated automatically through the MSOE SG Editor'
     config.about_page_file_path = 'about.md'
     config.about_page_title = 'About'
