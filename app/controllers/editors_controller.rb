@@ -2,8 +2,6 @@ class EditorsController < ApplicationController
   # GET /editors
   def index
     render json: Editors.all(sort: { 'Name': 'asc' }).select { |editor| editor['Email'] != @email }
-    rescue Airrecord::Error => e
-      render json: { 'error': e.message }, status: 500
   end
 
   # POST /editors
@@ -13,12 +11,8 @@ class EditorsController < ApplicationController
       if find_by_email_result.length > 0
         render json: { 'error': "An editor already exists with the email #{params[:email]}" }, status: 400
       else
-        begin
-          new_editor = Editors.create('Name': params[:name], 'Email': params[:email])
-          render json: new_editor 
-        rescue Airrecord::Error => e
-          render json: { 'error': e.message }, status: 500
-        end
+        new_editor = Editors.create('Name': params[:name], 'Email': params[:email])
+        render json: new_editor
       end
     elsif !params[:name] && params[:email]
       render json: { 'error': 'A name is required to create an editor.' }, status: 400
@@ -36,12 +30,6 @@ class EditorsController < ApplicationController
     editor['Email'] = params[:email] if params[:email]
     editor.save
     render json: editor
-    rescue Airrecord::Error => e 
-      if e.message.include? '404'
-        render json: { 'error': "No editor exists with the id #{params[:id]}" }, status: 404
-      else
-        render json: { 'error': e.message }, status: 500
-      end
   end
 
   # DELETE /editors
@@ -49,11 +37,5 @@ class EditorsController < ApplicationController
     editor = Editors.find(params[:id])
     editor.destroy
     render json: { 'success': true }
-    rescue Airrecord::Error => e
-      if e.message.include? '404'
-        render json: { 'success': false }, status: 404
-      else
-        render json: { 'error': e.message }, status: 500
-      end
   end
 end
