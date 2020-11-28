@@ -48,19 +48,6 @@ class EditorsControllerTest < BaseControllerTest
     end
   end
 
-  test 'create should return an error message with a 500 status code when an Airrecord::Error is raised' do 
-    # Arrange
-    Editors.expects(:create).raises(Airrecord::Error, 'My Error Message')
-
-    # Act
-    post '/editors', params: { name: 'test', email: 'test@gmail.com' }, headers: { 'Authorization': "Bearer #{AUTH_TOKEN}" }
-    json = JSON.parse(response.body)
-
-    # Assert
-    assert_response :internal_server_error
-    assert_equal 'My Error Message', json['error']
-  end
-
   test 'create should return an error message with a 400 status code when given an email of an existing edtior' do 
     editor = nil
 
@@ -167,29 +154,6 @@ class EditorsControllerTest < BaseControllerTest
     end
   end
 
-  test 'edit should return an error message with a 400 status code when provided an id of a nonexistant editor' do 
-    # Act
-    put '/editors', params: { id: 'myid', name: 'test', email: 'test@gmail.com' }, headers: { 'Authorization': "Bearer #{AUTH_TOKEN}" }
-    json = JSON.parse(response.body)
-
-    # Assert
-    assert_response :not_found
-    assert_equal 'No editor exists with the id myid', json['error']
-  end
-
-  test 'edit should return a 500 status code when an Airrecord::Error is raised' do 
-    # Arrange
-    Editors.expects(:find).raises(Airrecord::Error, 'My Error Message')
-
-    # Act
-    put '/editors', headers: { 'Authorization': "Bearer #{AUTH_TOKEN}" }
-    json = JSON.parse(response.body)
-
-    # Assert
-    assert_response :internal_server_error
-    assert_equal 'My Error Message', json['error']
-  end
-
   test 'delete should return a 200 ok response with a successful delete indication when provided valid parameters' do 
     editor = nil
     editor_deleted = false
@@ -209,29 +173,6 @@ class EditorsControllerTest < BaseControllerTest
     ensure
       editor.destroy if editor && !editor_deleted
     end
-  end
-
-  test 'delete should return a 200 ok response with a false delete indication when provided an id of a nonexistant editor' do 
-    # Act
-    delete '/editors?id=nonexistantid', headers: { 'Authorization': "Bearer #{AUTH_TOKEN}" }
-    json = JSON.parse(response.body)
-
-    # Assert
-    assert_response :not_found
-    assert_not json['success']
-  end
-
-  test 'delete should return a 500 status code when an Airrecord::Error is raised' do 
-    # Arrange
-    Editors.expects(:find).raises(Airrecord::Error, 'My Error Message')
-
-    # Act
-    delete '/editors', params: { id: 'myid' }, headers: { 'Authorization': "Bearer #{AUTH_TOKEN}" }
-    json = JSON.parse(response.body)
-
-    # Assert
-    assert_response :internal_server_error
-    assert_equal 'My Error Message', json['error']
   end
 
   private
