@@ -50,6 +50,6 @@ gem 'google-id-token'
 # For developing the gem locally delete the Gemfile.lock file and uncomment out the line below to specify
 # a development version of the gem on a given feature branch. Then comment out the line below which specifies
 # to use the version of the gem from rubygems. Note when you do that you will need to rerun the bundle install command again
-# gem 'jekyll-github-pages-gem', github: 'msoe-sg/jekyll-github-pages-gem', branch: 'feature/addPageSupport'
+gem 'jekyll-github-pages-gem', github: 'msoe-sg/jekyll-github-pages-gem', branch: 'dev'
 
-gem 'jekyll-github-pages-gem', '~> 1.1.3'
+# gem 'jekyll-github-pages-gem', '~> 1.1.3'
